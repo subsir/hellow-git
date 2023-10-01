@@ -92,6 +92,7 @@ void VisitBlock(int row, int column) {
     return;
   }
   if (map[row][column] == -1) { // 踩中雷了
+    visit[row][column] = 1; // 方块已被访问
     game_state = -1; // 游戏输了
     return;
   } else if (map[row][column] == 0) { // 周围无雷，向四周扩散未被访问过的点

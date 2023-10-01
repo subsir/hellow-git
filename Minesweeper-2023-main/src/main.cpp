@@ -3,6 +3,7 @@
 #include "include/server.h"
 
 int main() {
+  freopen("test.txt", "w", stdout);
   InitMap();
   PrintMap();
   while (true) {
