@@ -1,0 +1,8 @@
+[
+{
+  "directory": "D:/Studio/C/build/src",
+  "command": "C:\\MinGW\\mingw64\\bin\\g++.exe  @CMakeFiles/server.dir/includes_CXX.rsp -g -O2 -g -std=gnu++17 -o CMakeFiles\\server.dir\\main.cpp.obj -c D:\\Studio\\C\\Minesweeper-2023-main\\src\\main.cpp",
+  "file": "D:/Studio/C/Minesweeper-2023-main/src/main.cpp",
+  "output": "src/CMakeFiles/server.dir/main.cpp.obj"
+}
+]

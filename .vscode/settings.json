@@ -128,5 +128,6 @@
     "typeindex": "cpp",
     "typeinfo": "cpp",
     "valarray": "cpp"
-  }
+  },
+  "cmake.sourceDirectory": "D:/Studio/C/Minesweeper-2023-main"
 }

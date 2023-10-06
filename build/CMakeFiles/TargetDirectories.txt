@@ -1,0 +1,5 @@
+D:/Studio/C/build/CMakeFiles/edit_cache.dir
+D:/Studio/C/build/CMakeFiles/rebuild_cache.dir
+D:/Studio/C/build/src/CMakeFiles/server.dir
+D:/Studio/C/build/src/CMakeFiles/edit_cache.dir
+D:/Studio/C/build/src/CMakeFiles/rebuild_cache.dir
