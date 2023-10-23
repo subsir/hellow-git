@@ -83,7 +83,7 @@ void InitMap() {
  */
 void VisitBlock(int row, int column) {  
   step_count++; // 访问次数加一
-  if (map[row][column] != -1 and !visit[row][column]) { // 访问未访问方块
+  if (map[row][column] != -1 and visit[row][column] == 0) { // 访问未访问方块
     num_of_visited_blocks++; // 访问方块数加一
     visit[row][column] = 1; // 方块已被访问
   }
@@ -96,49 +96,49 @@ void VisitBlock(int row, int column) {
     game_state = -1; // 游戏输了
     return;
   } else if (map[row][column] == 0) { // 周围无雷，向四周扩散未被访问过的点
-    if (row > 0 and !visit[row - 1][column]) {
+    if (row > 0 and visit[row - 1][column] == 0) {
       num_of_visited_blocks++; 
       visit[row - 1][column] = 1; // 优化，避免队列中有重复元素
       blocks_waiting_to_visit_queue_x[tail_of_bwtv] = row - 1; // 向上
       blocks_waiting_to_visit_queue_y[tail_of_bwtv++] = column; //入队
     }
-    if (row < rows - 1 and !visit[row + 1][column]) {
+    if (row < rows - 1 and visit[row + 1][column] == 0) {
       num_of_visited_blocks++; 
       visit[row + 1][column] = 1; // 优化，避免队列中有重复元素      
       blocks_waiting_to_visit_queue_x[tail_of_bwtv] = row + 1; // 向下
       blocks_waiting_to_visit_queue_y[tail_of_bwtv++] = column; //入队
     }
-    if (column > 0 and !visit[row][column - 1]) {
+    if (column > 0 and visit[row][column - 1] == 0) {
       num_of_visited_blocks++; 
       visit[row][column - 1] = 1; // 优化，避免队列中有重复元素
       blocks_waiting_to_visit_queue_x[tail_of_bwtv] = row; // 向左
       blocks_waiting_to_visit_queue_y[tail_of_bwtv++] = column - 1; //入队      
     }
-    if (column < columns - 1 and !visit[row][column + 1]) {
+    if (column < columns - 1 and visit[row][column + 1] == 0) {
       num_of_visited_blocks++; 
       visit[row][column + 1] = 1; // 优化，避免队列中有重复元素      
       blocks_waiting_to_visit_queue_x[tail_of_bwtv] = row; // 向右
       blocks_waiting_to_visit_queue_y[tail_of_bwtv++] = column + 1; //入队
     }
-    if (column < columns - 1 and row > 0 and !visit[row - 1][column + 1]) {
+    if (column < columns - 1 and row > 0 and visit[row - 1][column + 1] == 0) {
       num_of_visited_blocks++; 
       visit[row - 1][column + 1] = 1; // 优化，避免队列中有重复元素   
       blocks_waiting_to_visit_queue_x[tail_of_bwtv] = row - 1; // 向右上
       blocks_waiting_to_visit_queue_y[tail_of_bwtv++] = column + 1; //入队
     } 
-    if (column < columns - 1 and row < rows - 1 and !visit[row + 1][column + 1]) {
+    if (column < columns - 1 and row < rows - 1 and visit[row + 1][column + 1] == 0) {
       num_of_visited_blocks++; 
       visit[row + 1][column + 1] = 1; // 优化，避免队列中有重复元素   
       blocks_waiting_to_visit_queue_x[tail_of_bwtv] = row + 1; // 向右下
       blocks_waiting_to_visit_queue_y[tail_of_bwtv++] = column + 1; //入队
     }   
-    if (column > 0 and row > 0 and !visit[row - 1][column - 1]) {
+    if (column > 0 and row > 0 and visit[row - 1][column - 1] == 0) {
       num_of_visited_blocks++; 
       visit[row - 1][column - 1] = 1; // 优化，避免队列中有重复元素   
       blocks_waiting_to_visit_queue_x[tail_of_bwtv] = row - 1; // 向左上
       blocks_waiting_to_visit_queue_y[tail_of_bwtv++] = column - 1; //入队
     }
-    if (column > 0 and row < rows -1 and !visit[row + 1][column - 1]) {
+    if (column > 0 and row < rows -1 and visit[row - 1][column - 1] == 0) {
       num_of_visited_blocks++; 
       visit[row + 1][column - 1] = 1; // 优化，避免队列中有重复元素   
       blocks_waiting_to_visit_queue_x[tail_of_bwtv] = row + 1; // 向左下
@@ -179,8 +179,8 @@ void VisitBlock(int row, int column) {
 void PrintMap() {
   for (int row = 0; row < rows; row++) {
     for (int column = 0; column < columns; column++) {
-      if (!visit[row][column]) { // 如果未访问
-        if (!game_state or game_state == -1) {
+      if (visit[row][column] == 0) { // 如果未访问
+        if (game_state == 0 or game_state == -1) {
           std::cout << '?'; // 且游戏继续进行或者输了但是方块仍未访问则输出'?'
         } else if (game_state == 1) {
           std::cout << '@'; //若已经获胜则当前方块为未访问的雷，输出'@'
